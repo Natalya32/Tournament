@@ -9,10 +9,6 @@ public class Player {
 
     protected String name;
 
-    public int getStrength() {
-        return strength;
-    }
-
     protected int strength;
 
     public Player(int id, String name, int strength) {

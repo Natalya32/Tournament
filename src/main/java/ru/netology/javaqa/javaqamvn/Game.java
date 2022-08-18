@@ -3,33 +3,31 @@ package ru.netology.javaqa.javaqamvn;
 import java.util.ArrayList;
 
 public class Game {
-    ArrayList<Player> players = new ArrayList<>();
+    private ArrayList<Player> players = new ArrayList<>();
 
     public void register(Player player) {
         players.add(player);
     }
 
     public int round(String playerName1, String playerName2) {
-        int strength1 = 0;
-        int strength2 = 0;
-        if (findByName(playerName1) == null) {
+        int strength1;
+        int strength2;
+        Player player1 = findByName(playerName1);
+        if (player1 == null) {
             throw new NotRegisteredException(
                     "Player " + playerName1 + "is not registered"
             );
+        } else {
+            strength1 = player1.strength;
         }
-        if (findByName(playerName2) == null) {
+
+        Player player2 = findByName(playerName2);
+        if (player2 == null) {
             throw new NotRegisteredException(
                     "Player " + playerName2 + "is not registered"
             );
-        }
-
-        for (Player player : players) {
-            if (player.getName() == playerName1) {
-                strength1 = player.getStrength();
-            }
-            if (player.getName() == playerName2) {
-                strength2 = player.getStrength();
-            }
+        } else {
+            strength2 = player2.strength;
         }
 
         if (strength1 > strength2) {
@@ -41,7 +39,7 @@ public class Game {
 
     public Player findByName(String Name) {
         for (Player player : players) {
-            if (player.getName() == Name) {
+            if (player.getName().equals(Name)) {
                 return player;
             }
         }
